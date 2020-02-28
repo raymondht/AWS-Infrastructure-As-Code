@@ -10,3 +10,6 @@ An app that tracks and displays number of traffic hit it.
 ## How To Run
 1. `npm install`
 2. `cdk deploy`
+
+## Reference
+https://cdkworkshop.com/20-typescript.html 
