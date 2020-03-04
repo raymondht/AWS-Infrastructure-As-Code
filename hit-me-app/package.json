@@ -1,8 +1,8 @@
 {
-  "name": "cdk-practice",
+  "name": "hit-me",
   "version": "0.1.0",
   "bin": {
-    "cdk-practice": "bin/cdk-practice.js"
+    "hit-me": "bin/hit-me.js"
   },
   "scripts": {
     "build": "tsc -b ./lambda/tsconfig.json",

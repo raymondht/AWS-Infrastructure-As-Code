@@ -5,7 +5,7 @@ import * as apigw from '@aws-cdk/aws-apigateway';
 import { HitCounter } from './hitcounter';
 import { Duration } from '@aws-cdk/core';
 
-export const createCdkPracticeStack = async (scope: cdk.App, id: string, props?: cdk.StackProps) => {
+export const createHitMeStack = async (scope: cdk.App, id: string, props?: cdk.StackProps) => {
     const stack = new cdk.Stack(scope, id, props);
 
     const helloFn = new lambda.Function(stack, 'HelloHandler', {
@@ -20,7 +20,7 @@ export const createCdkPracticeStack = async (scope: cdk.App, id: string, props?:
         downstream: helloFn
       });
 
-    new apigw.LambdaRestApi(stack, 'CDKPracticeEndpoint', {
+    new apigw.LambdaRestApi(stack, 'HitMeAPIEndpoint', {
         handler: helloWithCounter.handler
     });
 

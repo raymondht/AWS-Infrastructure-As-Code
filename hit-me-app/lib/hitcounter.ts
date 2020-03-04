@@ -3,6 +3,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as tsc from "tsc-prog";
 import { RemovalPolicy } from '@aws-cdk/core';
+
 export interface HitCounterProps {
   /** the function for which we want to count url hits **/
   downstream: lambda.Function;
@@ -49,8 +50,9 @@ export class HitCounter extends cdk.Construct {
         
         // grant the lambda role read/write permissions to our table
         table.grantReadWriteData(this.handler);
+        // grant the downstream function read permision to our table
         table.grantReadData(props.downstream);
-        // grant the lambda role invoke permissions to the downstream function
+        // grant the lambda role invoke permissions for the handler to the downstream function
         props.downstream.grantInvoke(this.handler);
     }
 }
