@@ -2,7 +2,7 @@
   "name": "hit-me",
   "version": "0.1.0",
   "bin": {
-    "hit-me": "bin/hit-me.js"
+    "hit-me": "bin/hit-me.ts"
   },
   "scripts": {
     "build": "tsc -b ./lambda/tsconfig.json",

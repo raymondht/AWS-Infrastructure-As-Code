@@ -4,6 +4,7 @@ import * as AwsLambdaTypes from 'aws-lambda'
 const lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
 const dynamo = new AWS.DynamoDB({region: 'ap-southeast-2', apiVersion: '2012-08-10'});
 export interface IHitCounterPayLoad {
+    event: AwsLambdaTypes.APIGatewayEvent,
     tableName: AWS.DynamoDB.TableName
 }
 exports.handler = async function(event: AwsLambdaTypes.APIGatewayEvent) {
@@ -28,7 +29,11 @@ exports.handler = async function(event: AwsLambdaTypes.APIGatewayEvent) {
 
     const lambdaRequestParams:AWS.Lambda.InvocationRequest = {
         FunctionName: process.env.DOWNSTREAM_FUNCTION_NAME,
-        Payload: JSON.stringify({event: event,tableName : process.env.HITS_TABLE_NAME})
+        Payload: JSON.stringify(
+            {
+                event: event,
+                tableName : process.env.HITS_TABLE_NAME
+            })
     }
 
     // call downstream function and capture response

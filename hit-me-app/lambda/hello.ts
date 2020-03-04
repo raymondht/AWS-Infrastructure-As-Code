@@ -3,11 +3,11 @@ import * as AWS from 'aws-sdk'
 import { IHitCounterPayLoad } from './hitcounter';
 
 const db = new AWS.DynamoDB.DocumentClient();
-exports.handler = async (event: IHitCounterPayLoad) => {
+exports.handler = async (payload: IHitCounterPayLoad) => {
     const GetItemParams = {
-      TableName: `${event.tableName}`,
+      TableName: `${payload.tableName}`,
       Key: {
-          path: "/"
+          path: `${payload.event.path}`
       },
       ProjectionExpression: "hits",
     };
@@ -18,7 +18,7 @@ exports.handler = async (event: IHitCounterPayLoad) => {
         return {
             statusCode: 200,
             headers: { "Content-Type": "text/plain" },
-            body: `Hello, CDK! You've hit me with ${response.Item.hits} hit(s)`
+            body: `Hello, CDK! You've hit me at ${payload.event.path} with ${response.Item.hits} hit(s)`
         }
     }
     catch (dbError) {
