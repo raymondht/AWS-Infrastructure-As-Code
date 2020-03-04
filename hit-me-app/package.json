@@ -32,6 +32,7 @@
     "@aws-cdk/aws-sqs": "1.25.0",
     "@aws-cdk/core": "1.25.0",
     "cdk": "1.25.0",
+    "cdk-dynamo-table-viewer": "^3.1.2",
     "tsc-prog": "^2.1.1",
     "typescript": "^3.8.2"
   }
