@@ -2,7 +2,7 @@
 import * as cdk from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as apigw from '@aws-cdk/aws-apigateway';
-import { HitCounter } from './hitcounter';
+import { HitCounter } from '../constructs/hitcounter';
 import { Duration } from '@aws-cdk/core';
 import { TableViewer } from 'cdk-dynamo-table-viewer';
 
