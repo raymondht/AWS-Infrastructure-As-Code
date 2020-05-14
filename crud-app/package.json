@@ -1,14 +1,13 @@
 {
   "name": "crud-app",
   "version": "0.1.0",
-  "bin": {
-    "crud-app": "bin/crud-app.js"
-  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "synth": "cdk synth *",
+    "deploy-all": "cdk deploy *"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.35.0",
@@ -16,7 +15,7 @@
     "@types/node": "10.17.5",
     "jest": "^25.3.0",
     "ts-jest": "^25.3.1",
-    "aws-cdk": "1.35.0",
+    "aws-cdk": "1.38.0",
     "ts-node": "^8.1.0",
     "typescript": "~3.7.2"
   },
