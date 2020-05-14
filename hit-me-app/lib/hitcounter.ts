@@ -3,6 +3,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as tsc from "tsc-prog";
 import { RemovalPolicy } from '@aws-cdk/core';
+
 export interface HitCounterProps {
   /** the function for which we want to count url hits **/
   downstream: lambda.Function;
@@ -12,11 +13,12 @@ export class HitCounter extends cdk.Construct {
 
     /** allows accessing the counter function */
     public readonly handler: lambda.Function;
+    public readonly table: dynamodb.Table;
 
     constructor(scope: cdk.Construct, id: string, props: HitCounterProps) {
         super(scope, id);
 
-        const table = new dynamodb.Table(this, 'HitsTable', {
+        this.table = new dynamodb.Table(this, 'HitsTable', {
             partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING },
             removalPolicy: RemovalPolicy.DESTROY
         });
@@ -43,14 +45,15 @@ export class HitCounter extends cdk.Construct {
             code: lambda.Code.fromAsset('lambda/dist'),
             environment: {
                 DOWNSTREAM_FUNCTION_NAME: props.downstream.functionName,
-                HITS_TABLE_NAME: table.tableName
+                HITS_TABLE_NAME: this.table.tableName
             }
         });
         
         // grant the lambda role read/write permissions to our table
-        table.grantReadWriteData(this.handler);
-        table.grantReadData(props.downstream);
-        // grant the lambda role invoke permissions to the downstream function
+        this.table.grantReadWriteData(this.handler);
+        // grant the downstream function read permision to our table
+        this.table.grantReadData(props.downstream);
+        // grant the lambda role invoke permissions for the handler to the downstream function
         props.downstream.grantInvoke(this.handler);
     }
 }

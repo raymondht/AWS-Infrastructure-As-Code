@@ -1,3 +1,3 @@
 {
-  "app": "npx ts-node bin/cdk-practice.ts"
+  "app": "npx ts-node bin/hit-me.ts"
 }
