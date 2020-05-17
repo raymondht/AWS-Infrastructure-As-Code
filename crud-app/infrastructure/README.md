@@ -1,14 +1,8 @@
-# Welcome to your CDK TypeScript project!
-
-This is a blank project for TypeScript development with CDK.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+### CRUD App Infrastructure
+1. A public S3 bucket to store static website content.
+2. A Route 53 record that points to that bucket (cars.erayus.com)
+3. Three API Gateway Endpoints to invoke 3 Lambda functions:
+   1. Get all cars
+   2. Add a car
+   3. Delete a car
+4. A DynamoDB named "Cars"
