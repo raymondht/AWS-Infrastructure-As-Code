@@ -4,4 +4,8 @@ import * as cdk from '@aws-cdk/core';
 import { CrudAppStack } from './stacks/crud-app-stack';
 
 const app = new cdk.App();
-new CrudAppStack(app, 'CrudAppStack');
+const env = {
+    region: 'ap-southeast-2', 
+    account: '112950332271'
+}
+new CrudAppStack(app, 'CrudAppStack', {env});
