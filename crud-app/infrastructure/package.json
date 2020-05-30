@@ -8,6 +8,7 @@
     "cdk": "cdk",
     "synth": "cdk synth *",
     "deploy": "cdk deploy *",
+    "deploy-web": "cdk deploy cars-deployment-stack",
     "destroy": "cdk destroy *",
     "diff": "cdk diff *"
   },
