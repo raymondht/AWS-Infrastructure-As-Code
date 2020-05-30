@@ -22,7 +22,7 @@ phases:
       - echo "⏳ Validating Database Infrastructure code.."
       - cd ${CODEBUILD_SRC_DIR}/crud-app/infrastructure/
       - npm run cdk bootstrap
-      - npm run cdk synth * 
+      - npm run cdk synth '*' 
       - npm run cdk deploy cars-hosting-stack
       - echo "✅ Finished deploying the hosting stack"
       - npm run cdk deploy cars-deployment-stack
