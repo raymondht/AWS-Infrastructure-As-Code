@@ -1,3 +1,4 @@
 {
+  "requireApproval": "never",
   "app": "npx ts-node src/index.ts"
 }
