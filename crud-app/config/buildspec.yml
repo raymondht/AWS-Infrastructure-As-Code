@@ -5,22 +5,22 @@ phases:
       nodejs: 10
     commands:
       - echo "⏳ Installing Database IaC dependencies.."
-      - cd ${CODEBUILD_SRC_DIR}/infrastructure/
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/infrastructure/
       - npm install
       - echo "✅ Finished installing Database dependencies"
       - echo "⏳ Installing Website dependencies.."
-      - cd ${CODEBUILD_SRC_DIR}/website/
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/website/
       - npm install
       - echo "✅ Finished installing Website dependencies"
   pre_build:
     commands:
       - echo ⏳ Building Website code...
-      - cd ${CODEBUILD_SRC_DIR}/website/
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/website/
       - npm run build
   build:
     commands:
       - echo "⏳ Validating Database Infrastructure code.."
-      - cd ${CODEBUILD_SRC_DIR}/infrastructure/
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/infrastructure/
       - npm run cdk bootstrap
       - npm run cdk synth * 
       - npm run cdk deploy cars-hosting-stack
