@@ -10,6 +10,5 @@ Three API Gateway Endpoints and 3 Lambda functions:
    2. Add a car
    3. Delete a car
 
-
 ## Storage
-A DynamoDB named "Cars"
+A DynamoDB that has a table named "Cars"

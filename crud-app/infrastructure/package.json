@@ -13,24 +13,28 @@
     "diff": "cdk diff *"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.39.0",
-    "@types/jest": "25.2.2",
-    "@types/node": "10.17.5",
+    "@aws-cdk/assert": "1.45.0",
+    "@types/jest": "26.0.0",
+    "@types/node": "14.0.13",
     "jest": "26.0.1",
-    "ts-jest": "26.0.0",
-    "aws-cdk": "1.39.0",
-    "ts-node": "8.10.1",
-    "typescript": "3.9.2"
+    "ts-jest": "26.1.0",
+    "aws-cdk": "1.45.0",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-cloudformation": "1.39.0",
-    "@aws-cdk/aws-cloudfront": "1.39.0",
-    "@aws-cdk/aws-s3": "1.39.0",
-    "@aws-cdk/aws-s3-deployment": "1.39.0",
-    "@aws-cdk/core": "1.39.0",
-    "@mobileposse/auto-delete-bucket": "1.28.0",
-    "@aws-cdk/aws-route53-targets": "1.39.0",
-    "@aws-cdk/aws-route53": "1.39.0",
-    "source-map-support": "0.5.19"
+    "@aws-cdk/aws-apigateway": "1.45.0",
+    "@aws-cdk/aws-cloudformation": "1.45.0",
+    "@aws-cdk/aws-cloudfront": "1.45.0",
+    "@aws-cdk/aws-dynamodb": "1.45.0",
+    "@aws-cdk/aws-lambda": "1.45.0",
+    "@aws-cdk/aws-route53": "1.45.0",
+    "@aws-cdk/aws-route53-targets": "1.45.0",
+    "@aws-cdk/aws-s3": "1.45.0",
+    "@aws-cdk/aws-s3-deployment": "1.45.0",
+    "@aws-cdk/core": "1.45.0",
+    "@mobileposse/auto-delete-bucket": "1.44.0",
+    "source-map-support": "0.5.19",
+    "uuid": "^8.1.0"
   }
 }
