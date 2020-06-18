@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { HostingStack } from './stacks/hosting-stack';
-import { DeploymentStack } from './stacks/deployment-stack';
-import {ComStack} from './stacks/com-stack';
+import { HostingStack } from './src/stacks/hosting-stack';
+import { DeploymentStack } from './src/stacks/deployment-stack';
+import {ComStack} from './src/stacks/com-stack';
+import * as tsc from "tsc-prog";
 
 const app = new cdk.App();
 const env = {
