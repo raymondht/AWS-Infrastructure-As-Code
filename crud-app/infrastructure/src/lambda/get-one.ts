@@ -6,16 +6,16 @@ const PRIMARY_KEY = process.env.PRIMARY_KEY || '';
 
 export const handler = async (event: any = {}) : Promise <any> => {
   const db = new aws.DynamoDB.DocumentClient();
-  const requestedItemId = event.pathParameters.id;
+  const requestedCarId = event.pathParameters.id;
   
-  if (!requestedItemId) {
+  if (!requestedCarId) {
     return { statusCode: 400, body: `Error: You are missing the path parameter id` };
   }
 
   const params = {
     TableName: TABLE_NAME,
     Key: {
-      [PRIMARY_KEY]: requestedItemId
+      [PRIMARY_KEY]: requestedCarId
     }
   };
 

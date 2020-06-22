@@ -23,79 +23,82 @@ export class ComStack extends cdk.Stack {
           // DESTROY, cdk destroy will delete the table (even if it has data in it)
           removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production code
         });
-    
-
         
-    const getOneLambda = new lambda.Function(this, 'getOneItemFunction', {
-        code: new lambda.AssetCode('src'),
-        handler: 'get-one.handler',
-        runtime: lambda.Runtime.NODEJS_10_X,
-        environment: {
-          TABLE_NAME: dynamoTable.tableName,
-          PRIMARY_KEY: 'itemId'
-        }
-      });
-  
-      const getAllLambda = new lambda.Function(this, 'getAllItemsFunction', {
-        code: new lambda.AssetCode('src'),
-        handler: 'get-all.handler',
-        runtime: lambda.Runtime.NODEJS_10_X,
-        environment: {
-          TABLE_NAME: dynamoTable.tableName,
-          PRIMARY_KEY: 'itemId'
-        }
-      });
-  
-      const createOne = new lambda.Function(this, 'createItemFunction', {
-        code: new lambda.AssetCode('src'),
-        handler: 'create.handler',
-        runtime: lambda.Runtime.NODEJS_10_X,
-        environment: {
-          TABLE_NAME: dynamoTable.tableName,
-          PRIMARY_KEY: 'itemId'
-        }
-      });
-  
-      const updateOne = new lambda.Function(this, 'updateItemFunction', {
-        code: new lambda.AssetCode('src'),
-        handler: 'update-one.handler',
-        runtime: lambda.Runtime.NODEJS_10_X,
-        environment: {
-          TABLE_NAME: dynamoTable.tableName,
-          PRIMARY_KEY: 'itemId'
-        }
-      });
-  
-      const deleteOne = new lambda.Function(this, 'deleteItemFunction', {
-        code: new lambda.AssetCode('src'),
-        handler: 'delete-one.handler',
-        runtime: lambda.Runtime.NODEJS_10_X,
-        environment: {
-          TABLE_NAME: dynamoTable.tableName,
-          PRIMARY_KEY: 'itemId'
-        }
-      });
+        
 
+    // const getOneLambda = new lambda.Function(this, 'getOneItemFunction', {
+    //     code: new lambda.AssetCode('src/lambda/dist'),
+    //     handler: 'get-one.handler',
+    //     runtime: lambda.Runtime.NODEJS_10_X,
+    //     environment: {
+    //       TABLE_NAME: dynamoTable.tableName,
+    //       PRIMARY_KEY: 'carId'
+    //     }
+    //   });
+      
+    //   const getAllLambda = new lambda.Function(this, 'getAllItemsFunction', {
+    //     code: new lambda.AssetCode('src/lambda/dist'),
+    //     handler: 'get-all.handler',
+    //     runtime: lambda.Runtime.NODEJS_10_X,
+    //     environment: {
+    //       TABLE_NAME: dynamoTable.tableName,
+    //       PRIMARY_KEY: 'carId'
+    //     }
+    //   });
+  
+      const createOne = new lambda.Function(this, 'createCarFunction', {
+        code: new lambda.AssetCode('src/lambda'),
+        handler: 'create-py.handler',
+        runtime: lambda.Runtime.PYTHON_3_7,
+        environment: {
+          TABLE_NAME: dynamoTable.tableName,
+          PRIMARY_KEY: 'carId'
+        }
+      });
+  
+      // const updateOne = new lambda.Function(this, 'updateItemFunction', {
+      //   code: new lambda.AssetCode('src'),
+      //   handler: 'update-one.handler',
+      //   runtime: lambda.Runtime.NODEJS_10_X,
+      //   environment: {
+      //     TABLE_NAME: dynamoTable.tableName,
+      //     PRIMARY_KEY: 'carId'
+      //   }
+      // });
+  
+      // const deleteOne = new lambda.Function(this, 'deleteItemFunction', {
+      //   code: new lambda.AssetCode('src'),
+      //   handler: 'delete-one.handler',
+      //   runtime: lambda.Runtime.NODEJS_10_X,
+      //   environment: {
+      //     TABLE_NAME: dynamoTable.tableName,
+      //     PRIMARY_KEY: 'itemId'
+      //   }
+      // });
+      
+        dynamoTable.grantReadWriteData(createOne);
+        // dynamoTable.grantReadWriteData(getOneLambda);
+        // dynamoTable.grantReadWriteData(getAllLambda);
         
 
         const cars = api.root.addResource('cars');
-        const getAllIntegration = new apigateway.LambdaIntegration(getAllLambda);
-        cars.addMethod('GET', getAllIntegration);
+        // onst getAllIntegration = new apigateway.LambdaIntegration(getAllLambda);
+        // cars.addMethod('GET', getAllIntegration);
 
         const createOneIntegration = new apigateway.LambdaIntegration(createOne);
         cars.addMethod('POST', createOneIntegration);
         addCorsOptions(cars);
 
-        const singleItem = cars.addResource('{id}');
-        const getOneIntegration = new apigateway.LambdaIntegration(getOneLambda);
-        singleItem.addMethod('GET', getOneIntegration);
+        // const singleItem = cars.addResource('{id}');
+        // const getOneIntegration = new apigateway.LambdaIntegration(getOneLambda);
+        // singleItem.addMethod('GET', getOneIntegration);
 
-        const updateOneIntegration = new apigateway.LambdaIntegration(updateOne);
-        singleItem.addMethod('PATCH', updateOneIntegration);
+        // const updateOneIntegration = new apigateway.LambdaIntegration(updateOne);
+        // singleItem.addMethod('PATCH', updateOneIntegration);
 
-        const deleteOneIntegration = new apigateway.LambdaIntegration(deleteOne);
-        singleItem.addMethod('DELETE', deleteOneIntegration);
-        addCorsOptions(singleItem);
+        // const deleteOneIntegration = new apigateway.LambdaIntegration(deleteOne);
+        // singleItem.addMethod('DELETE', deleteOneIntegration);
+        // addCorsOptions(singleItem);
     }
 }
 export function addCorsOptions(apiResource: apigateway.IResource) {
