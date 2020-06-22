@@ -30,8 +30,11 @@ def handler(event, context):
             Item = car
         )
         return {
+            'headers': {
+                'Access-Control-Allow-Origin': 'localhost:3000'
+            },
             'statusCode': 201, 
-            'body': response
+            'body': "Car Successfully Created"
         }
     except Exception as e:
         print(e)
