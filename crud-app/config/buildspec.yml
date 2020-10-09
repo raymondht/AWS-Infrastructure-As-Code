@@ -1,0 +1,31 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - echo "⏳ Installing Database IaC dependencies.."
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/infrastructure/
+      - npm install
+      - echo "✅ Finished installing Database dependencies"
+      - echo "⏳ Installing Website dependencies.."
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/website/
+      - npm install
+      - echo "✅ Finished installing Website dependencies"
+  pre_build:
+    commands:
+      - echo ⏳ Building Website code...
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/website/
+      - npm run build
+  build:
+    commands:
+      - echo "⏳ Validating Database Infrastructure code.."
+      - cd ${CODEBUILD_SRC_DIR}/crud-app/infrastructure/
+      - npm run cdk bootstrap
+      - npm run cdk synth '*' 
+      - npm run cdk deploy cars-hosting-stack
+      - echo "✅ Finished deploying the hosting stack"
+      - npm run cdk deploy cars-deployment-stack
+      - echo "✅ Finished deploying the website to the hosting platform"
+
+   
