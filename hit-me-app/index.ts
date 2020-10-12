@@ -1,20 +1,9 @@
-// import { buildLambda } from './lib/buildlambda'
+import * as cdk from '@aws-cdk/core';
+import { createHitMeStack } from './lib/stacks/hit-me-stack';
 
-// console.log(buildLambda());
-// import * as AWS from 'aws-sdk';
-// const dynamo = new AWS.DynamoDB({region: 'ap-southeast-2', apiVersion: '2012-08-10'});
-
-// const GetItemParams : AWS.DynamoDB.GetItemInput = {
-//     TableName: 'CdkPracticeStack-HelloHitCounterHitsTable4E56919D-1DWZIHT4HD4WL',
-//     Key: {
-//         path: {"S":"/"}
-//     },
-//     ProjectionExpression:"hits",
-// }
-// dynamo.getItem(GetItemParams, (err: any, data:any) => {
-//     console.log(data.Item.hits.N);
-// })
 import * as tsc from "tsc-prog";
+
+const app = new cdk.App();
 
 tsc.build({
     basePath: "",
@@ -29,3 +18,5 @@ tsc.build({
     include: ['lambda/**/*'],
     exclude: ['**/*.test.ts', '**/*.spec.ts', 'cdk.out'],
 })
+
+createHitMeStack(app, 'HitMeStack');
